@@ -92,11 +92,11 @@ class Cat extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'ident' => 'integer',
+        'ident' => 'string',
         'name' => 'string',
         'image' => 'string',
         'xml_name' => 'string',
-        'parent_id' => 'integer',
+        'parent_id' => 'string',
         'menu' => 'boolean'
     ];
 

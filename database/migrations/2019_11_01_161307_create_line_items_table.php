@@ -25,7 +25,7 @@ class CreateLineItemsTable extends Migration
             //     ->onDelete('CASCADE');
 
 
-            $table->bigInteger('product_id')->nullable();
+            $table->string('product_id')->nullable();
             $table->bigInteger('order_id')->nullable();
             $table->timestamps();
         });

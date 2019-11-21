@@ -104,12 +104,12 @@ class Product extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'ident' => 'integer',
+        'ident' => 'string',
         'name' => 'string',
         'image' => 'string',
         'xml_name' => 'string',
         'xml_cat' => 'string',
-        'cat_id' => 'integer',
+        'cat_id' => 'string',
         'price_amount' => 'float',
         'menu' => 'boolean'
     ];

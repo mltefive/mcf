@@ -16,7 +16,8 @@ class ImportProduct extends Command {
     public function handle(){
         echo "Get products file skip\n";
         // exec('wget --secure-protocol=TLSv1 --no-check-certificate --header="Content-Type: text/xml" --http-user=18 --http-password=18 --post-file=post_items.xml -O public/storage/data_items.xml -q https://46.39.29.2:2244/rk7api/v0/xmlinterface.xml');
-        $data_items = Storage::get('public\data_items.xml');
+        $data_items = Storage::get('public\import.xml');
+
 // Items
         echo "Import Items: ";
         Product::truncate();
@@ -24,37 +25,44 @@ class ImportProduct extends Command {
         $xml3 = simplexml_load_string($data_items);
         $json3 = json_encode($xml3);
         $array3 = json_decode($json3,TRUE,512,JSON_INVALID_UTF8_IGNORE);
-        echo count($array3["RK7Reference"]["Items"]['Item']);
+        // echo count($array3["RK7Reference"]["Items"]['Item']);
         echo " = ";
         // echo Product::count();
         echo "\n";
 
-// // FOREACH Items
-        foreach ($array3["RK7Reference"]["Items"]['Item'] as $item) {
-//     // RANDOM
-            $arrX = array("/uploads/product-chicken-wings.jpg", "/uploads/product-burger.jpg", "/uploads/product-chicken-burger.jpg", "/uploads/product-sushi.jpg", "/uploads/product-pizza.jpg" );
-            $randIndex = array_rand($arrX, 2);
-//     // FIND
+        // FOREACH CATS
+            foreach ($array3 as $item) {
+                foreach ($item as $i) {
+                    if (isset($i["Товар"])) {
+                        // var_dump($i);
+                            foreach ($i["Товар"] as $i2) {
+                                    if (isset($i2['Наименование'])) {
+                                        var_dump($i2['Ид']);
+                                        // var_dump($i2);
+                                        var_dump($i2["Артикул"]);
+                                        var_dump($i2['Наименование']);
+                                        
+                                        var_dump($i2["Категория"]);
+                                        // var_dump($i2["Группы"]);
 
-            // $row = Product::create( array('id' => $item['@attributes']['Ident'], 'name' => $item['@attributes']['Name'], 'ident' => $item['@attributes']['Ident'], 'xml_name' => $item['@attributes']['Name'], "cat_id" => (int) $item['@attributes']['MainParentIdent'], 'xml_cat' => $item['@attributes']['CategPath'], 'image'=> $arrX[$randIndex[0]] ) );
-            // echo "+";
+                                        $arrX = array("/uploads/product-chicken-wings.jpg", "/uploads/product-burger.jpg", "/uploads/product-chicken-burger.jpg", "/uploads/product-sushi.jpg", "/uploads/product-pizza.jpg" );
+                                        $randIndex = array_rand($arrX, 2);
+
+                                        foreach ($i2["Группы"] as $i3) {
+                                            // $gr = $i3["Ид"];
+                                            var_dump($i3);
+                                            Product::create( array('name' => $i2['Наименование'], 'ident' => $i2['Ид'], 'xml_name' => $i2["Артикул"], "cat_id" => $i3, 'image'=> $arrX[$randIndex[0]] ) );
+                                        }
 
 
-            $row = Product::where('ident' , '=', $item['@attributes']['Ident'])->first();
-            if ($row) {
-                // 'name' => $item['@attributes']['Name'], 
-                $row->update( array('xml_name' => $item['@attributes']['Name'], "cat_id" => (int) $item['@attributes']['MainParentIdent'], 'xml_cat' => $item['@attributes']['CategPath'] ) );
-                $row->save();
-                echo "~";
-            } else {
-                Product::create( array('id' => $item['@attributes']['Ident'], 'name' => $item['@attributes']['Name'], 'ident' => $item['@attributes']['Ident'], 'xml_name' => $item['@attributes']['Name'], "cat_id" => (int) $item['@attributes']['MainParentIdent'], 'xml_cat' => $item['@attributes']['CategPath'], 'image'=> $arrX[$randIndex[0]] ) );
-                echo "+";
+                                        // Product::create( array('name' => $i2['Наименование'], 'ident' => $i2['Ид'], 'xml_name' => $i2["Артикул"], "cat_id" => $i2["Категория"], 'image'=> $arrX[$randIndex[0]] ) );
+
+                                    }
+                            }
+                    }
+                }
             }
 
-            unset($randIndex);
-        }
-        echo "\n";
-// FOREACH Items END
 
     }
 }

@@ -38,7 +38,7 @@ class LineItem extends Model
         'id' => 'integer',
         'qty' => 'integer',
         'cart_id' => 'integer',
-        'product_id' => 'integer',
+        'product_id' => 'string',
         'order_id' => 'integer'
     ];
 
