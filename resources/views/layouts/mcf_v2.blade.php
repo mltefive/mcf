@@ -179,7 +179,7 @@ CSS
                                         <a href="/">Главная</a>
                                     </li>
                                     <li>
-                                        <a href="/mcf_products">Продукция</a>
+                                        <a href="/mcf_cats">Продукция</a>
                                         <ul class="dropdown">
                                         @foreach($cats as $cat)
                                             <li >
