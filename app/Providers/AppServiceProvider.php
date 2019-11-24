@@ -21,6 +21,7 @@ use Auth;
 // use App\Providers\RouteServiceProvider;
 
 use App\Models\Cart;
+use App\Models\Cat;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -64,8 +65,10 @@ class AppServiceProvider extends ServiceProvider
     
                 $session_id = \Session::getId();
                 $cart = Cart::firstOrCreate(['session_id' => $session_id]);
+                $cats = Cat::all()->sortBy('name');
                 session('cart', $cart);
                 session('session_id', $session_id);
+                $view->with('cats', $cats );
                 $view->with('cart', $cart );
                 $view->with('session_id', $session_id );
     

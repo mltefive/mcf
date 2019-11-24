@@ -323,6 +323,13 @@ Route::get('/cart', function () {
     return view('menu3.cart')->with('cart', session('cart'));
 });
 
+Route::get('/mcf_cart', function () {
+    // session('cart');
+    // return view('menu3.cart');
+    return view('mcf_v2.cart')->with('cart', session('cart'));
+});
+
+
 Route::get('/product/{ident}/to_cart/{qty}', 'ProductController@to_cart');
 // Route::get('/cart/{cart_id}/product/{ident}/to_cart/{qty}', 'ProductController@to_cart');
 
@@ -370,32 +377,51 @@ Route::get('/product/{ident}/to_cart/{qty}', 'ProductController@to_cart');
 // });
 
 
+// Route::get('/', function () {
+//     return view('menu3.index_site');
+// });
+
 Route::get('/', function () {
-    return view('menu3.index_site');
+    return view('mcf_v2.root');
 });
 
 
 
 
 
-Route::get('/contact', function () {
-    return view('menu3.contact1');
+
+
+
+
+
+// Route::get('/reservation', function () {
+//     return view('menu3.reservation');
+// });
+
+// Route::get('/about', function () {
+//     return view('menu3.about');
+// });
+// Route::get('/about2', function () {
+//     return view('menu3.about2');
+// });
+
+
+
+
+Route::get('/mcf_about_us', function () {
+    return view('mcf_v2.about_us');
 });
 
 
-
-
-
-Route::get('/reservation', function () {
-    return view('menu3.reservation');
+Route::get('/mcf_menu', function () {
+    return view('mcf_v2.menu');
 });
 
-Route::get('/about', function () {
-    return view('menu3.about');
+Route::get('/mcf_service', function () {
+    return view('mcf_v2.service');
 });
-Route::get('/about2', function () {
-    return view('menu3.about2');
-});
+
+
 // rs-fullwidth-wrap
 
 
@@ -409,12 +435,73 @@ Route::get('/admin2_mindmap', function () {
 
 
 
+Route::get('/mcf_products', function () {
+        $categories = Cat::all();
+        return view('mcf_v2.mcf_products')->with('categories', $categories);
+    // return view('mcf_v2.mcf_product');
+});
+
+
+Route::resource('mcf_cats', 'CatController');
+    
+Route::get('/mcf_cats', function () {
+        $cats = Cat::all();
+        return view('mcf_v2.mcf_cats')->with('cats', $cats);
+    // return view('mcf_v2.mcf_product');
+});
+
+Route::get('/mcf_cat/{ident}', function ($ident, Request $request) {
+
+    $language = $request->selected_language ?? 'ru';
+    session(['selected_language' =>$language]);
+    App::setLocale($language);
+
+        $cat2 = Cat::find($ident);
+        return view('mcf_v2.mcf_cat')->with('cat2', $cat2);
+});
+
+Route::get('/mcf_v2', function () {
+    return view('layouts.mcf_v2');
+});
+
+
+Route::get('/mcf_blog/{id}', function ($id) {
+    $mcf_blog_id = 1;
+    return view('mcf_v2.mcf_blog')->with('mcf_blog_id', $mcf_blog_id);;
+});
+
+Route::get('/mcf_blogs', function () {
+        // $blogs = Post::all()->get();
+
+        $cats = Cat::all();
+        return view('mcf_v2.mcf_blogs')->with('cats', $cats);
+
+        // return view('mcf_v2.mcf_blogs')->with('cats', $cats);
+
+    // return view('mcf_v2.mcf_blogs');
+});
+
+
+
 
 
 // php artisan route:list
 
 
 
+Route::get('/mcf_contact', function (Request $request) {
+
+    $language = $request->selected_language ?? 'ru';
+    session(['selected_language' =>$language]);
+    App::setLocale($language);
+
+    return view('mcf_v2.contact');
+});
+
+
+Route::get('/contact', function () {
+    return view('menu3.contact1');
+});
 
 
 
@@ -443,9 +530,30 @@ if (isset($request->all()['your-contact'])) {
        $sendm->to('mltefive@gmail.com', 'Admin')->subject('Запрос');
    });
 
-    return view('menu3.contact_us')->with('contact', $contact)->with('mes', $mes);
+    return view('mcf_v2.contact_us')->with('contact', $contact)->with('mes', $mes);
 } else {
     # code...
-    return view('menu3.contact_us')->with('contact', '$contact')->with('mes', '$mes');
+    return view('mcf_v2.contact_us')->with('contact', '$contact')->with('mes', '$mes');
 }
 })->name('contact_us');
+
+
+Route::get('setlocale/{locale}', function (Request $request, $locale) {
+
+    $language = $request->language ?? 'ru';
+    session(['selected_language' =>$language]);
+    // App::setLocale(session('selected_language'));
+    App::setLocale($locale);
+
+    $locale_get = App::getLocale();
+    return $locale_get;
+    //
+});
+
+
+Route::get('getlocale', function (Request $request) {
+    $locale_get = App::getLocale();
+    return $locale_get;
+});
+
+

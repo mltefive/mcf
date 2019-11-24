@@ -135,6 +135,7 @@ class Product extends Model
     }
     public function cat()
     {
+        // return $this->belongsTo('App\Models\Cat', 'cat_id');
         return $this->belongsTo('App\Models\Cat', 'cat_id');
         // return $this->hasMany('App\Models\LineItem');
         // return $this->belongsTo('App\Carts');

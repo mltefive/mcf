@@ -65,13 +65,22 @@ class ImportCat extends Command {
                                       if (isset($i2['Группы'])) {
                                             // if (isset($i2[0]['Группa'])) {
                                         foreach ($i2['Группы'] as $i3) {
+
+foreach ($i3 as $i4) {
                                                 $arrXX = array("uploads/menu-title-burgers.jpg", "uploads/menu-title-desserts.jpg", "uploads/menu-title-drinks.jpg", "uploads/menu-title-pasta.jpg", "uploads/menu-title-pizza.jpg", "uploads/menu-title-sushi.jpg" );
                                                 $randIndex2 = array_rand($arrXX, 2);
-                                                // var_dump($i3);
-                                                var_dump($i3['Наименование']);
-                                                var_dump($i3['Ид']);
-                                                Cat::create(array ( 'id' => $i3['Ид'], 'name' => $i3['Наименование'], 'ident' => $i3['Ид'], 'image'=> '/'.$arrXX[$randIndex2[0]], 'xml_name' => $i3['Наименование'], 'parent_id' => 0 ));
-                                                echo "+";                                                
+                                                    // var_dump($i3);
+                                                    // var_dump($i4);
+                                                    var_dump($i4['Наименование']);
+                                                    // isset($i3)
+                                                    Cat::create(array ( 'id' => $i4['Ид'], 'name' => $i4['Наименование'], 'ident' => $i4['Ид'], 'image'=> '/'.$arrXX[$randIndex2[0]], 'xml_name' => $i4['Наименование'], 'parent_id' => 0 ));
+                                                    echo "+";                                                
+
+}
+                                                    // var_dump($i3[0]["Наименование"]);
+
+                                                // var_dump($i3['Наименование']);
+                                                // var_dump($i3['Ид']);
 
                                         //     }
                                         }   
