@@ -61,7 +61,7 @@
 
                             @foreach($cats as $cat1)
                                 <li class="d-flex justify-content-between">
-                                    <a href="#">{{ $cat1->name }}</a>
+                                    <a href="/mcf_cat/{{ $cat1->ident }}">{{ $cat1->name }}</a>
                                     <span>
                                         (
                                             {{ count($cat1->products) }}
