@@ -35,6 +35,8 @@ CSS
     <link rel="stylesheet" href="/mcf/css/style.css">
     <link rel="stylesheet" href="/mcf/css/responsive.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
     <style type="text/css">
         .breakpoint-off .dopenav ul li .dropdown {
             width: 17em;
@@ -46,9 +48,15 @@ CSS
             background: white;
         }
 
-        a:hover {
+        #nav a:hover {
             color: red !important;
         }
+
+        #nav a:hover #qty_badge {
+            background-color: red !important;
+        }
+
+        
 
         .primary-btn {
             background: #f00;
@@ -64,6 +72,8 @@ CSS
         .blog-lists-section .tags-widget ul li a {
             font-size: 14px;
         }
+
+        
 
     </style>
     @yield('css')
@@ -191,9 +201,9 @@ CSS
                                     </li>
                                     <li>
                                         <a href="/mcf_cart">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            <span id="qty_badge2" class="badge badge-notify" style="font-size:10px;" data-cart_id={{ $cart->id }}></span>
-                                            Корзина
+                                            <i class="fa fa-shopping-cart">
+                                            </i>
+                                            Корзина <span id="qty_badge" class="badge badge-secondary" style="font-size:10px;" data-cart_id={{ $cart->id }}></span>
                                         </a>
                                     </li>
                                     <li>
@@ -357,6 +367,28 @@ JS
     <script src="/mcf/js/main.js"></script>
 
     @yield('script')
+
+    <script type="text/javascript">
+    function qty_badge() {
+        cart_id = $('#qty_badge').data('cart_id')
+        $.ajax({
+            url: '/carts/'+cart_id+'/total_qty',
+            type: 'GET',
+            success: function(result) {
+
+              $('#qty_badge').text(result)
+              // $('#qty_badge2').text(result)
+              
+            }
+        });
+
+    }
+
+    $(document).ready(function (){
+        setInterval(qty_badge, 2000);
+    });
+
+    </script>
 
 </body>
 

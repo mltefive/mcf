@@ -170,13 +170,13 @@
 
                                                 <h4>{{ $product->name ?? '??' }}</h4>
                                                 <p>
-                                                    {{ $product->price_amount ?? '??' }}
+                                                    {{ $product->price_amount ?? '??' }} руб.
                                                 </p>
 
-                                                        <a href="#" class="card-link to_cart text-red" >
-                                                            В корзину
-                                                        </a>
-                                                        <a href="#" class="card-link">Больше</a>
+                                                <button class="card-link text-red to_cart btn-sm btn" data-ident="{{ $product->ident }}" >
+                                                    В корзину
+                                                </button>
+                                                
 
                                             </div>
                                           </a>
@@ -192,131 +192,6 @@
                 </section>
                 <!-- End service section -->
 
-                    <div class="row">
-                        
-                        {{-- {{ var_dump($cat2->name) }} --}}
-                            {{-- @foreach($cats as $cat) --}}
-                                    {{-- <h2> --}}
-                                        {{-- <a href="#">{{ $cat->name }}</a> --}}
-                                    {{-- </h2> --}}
-                                            {{-- {{ count($cat->products) }} --}}
-                                    @foreach($cat2->products as $product)
-                                    @if (isset($product))
-
-                                        <div class="col-md-4" style="    margin-bottom: 1em;">
-                                            <div class="card">
-                                              <img class="card-img-top" src="{{ $cat2->image }}" alt="Card image cap">
-                                              <div class="card-body">
-                                                <h5 class="card-title">{{ $product->name ?? 'Наименование продукта' }}</h5>
-                                                <p class="card-text">{{ $product->desc ?? 'Краткое описание' }}</p>
-
-                                              </div>
-
-                                              <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">{{ $product->price_amount ?? '??' }}</li>
-                                              </ul>
-
-                                              <div class="card-body">
-                                                <a href="#" class="card-link to_cart text-red" >
-                                                    В корзину
-                                                </a>
-                                                <a href="#" class="card-link">Больше</a>
-                                              </div>
-                                            </div>
-                                        </div>
-
-                                    @endif
-
-                                    @endforeach
-                            {{-- @endforeach --}}
-
-
-                    </div>
-
-                    <div class="blog-lists" style="margin-top: 2em;">
-
-                        <div class="single-blog-post">
-                            <div class="post-thumb relative">
-                                <div class="overlay overlay-bg"></div>
-                                <img class="img-fluid" src="/bg14.jpg" alt="">
-                            </div>
-                            <div class="post-details">
-                                <ul class="tags">
-                                    <li><a href="#">Open Air</a></li>
-                                    <li><a href="#">Музыка</a></li>
-                                </ul>
-                                <a href="/blogs">
-                                    <h2>Каки мощности указывают производители?</h2>
-                                </a>
-                                    <h3>Стандарты мощности в России (номинальная, синусоидальная)</h3>
-                                <hr>
-                                <p>
-                                    В России используется два параметра мощности - номинальная и синусоидальная. Раньше использовалась номинальная мощность, то сейчас чаще - синусоидальная. Например, колонки 35АС впоследствии получили обозначение S-90 (номинальная мощность 35 Вт, синусоидальная мощность 90 Вт)
-                                </p>
-
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        Номинальная мощность - мощность при среднем положении регулятора громкости усилителя, при которой остальные параметры устройства соответствуют заявленным в техническом описании.
-                                    </li>
-                                    <li class="list-group-item">
-                                        Синусоидальная мощность - мощность, при которой усилитель или колонка может работать в течение длительного времени с реальным музыкальным сигналом без физического повреждения. Обычно в 2 - 3 раза выше номинальной.
-                                        
-                                    </li>
-                                </ul>
-                                <hr>
-                                <h3>Западные стандарты: DIN, RMS и PMPO</h3>
-                                <hr>
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        DIN - примерно соответствует синусоидальной мощности - мощность, при которой усилитель или колонка может работать в течение длительного времени с сигналом "розового шума" без физического повреждения.
-                                    </li>
-                                    <li class="list-group-item">
-                                        RMS (Rated Maximum Sinusoidal) - Максимальная (предельная) синусоидальная мощность - мощность, при которой усилитель или колонка может работать в течение одного часа с реальным музыкальным сигналом без физического повреждения. Обычно на 20 - 25 процентов выше DIN.
-                                        
-                                    </li>
-                                    <li class="list-group-item">
-                                        PMPO (Peak Music Power Output)- Музыкальная мощность (запредельная :-)) - мощность, которую динамик колонки может выдержать в течение 1 -2 секунд на сигнале низкой частоты (около 200 Гц) без физического повреждения. Обычно в 10 - 20 раз выше DIN.
-                                        
-                                    </li>
-                                </ul>
-                                <hr>
-
-
-                                <div class="user-details d-flex align-items-center">
-                                    <div class="user-img">
-                                        <img src="/mcf/img/avatar1.jpg" alt="">
-                                    </div>
-                                    <div class="details">
-                                        <a href="#">
-                                            <h4>Редактор MCF</h4>
-                                        </a>
-                                        <p>Ноябрь 24,2019</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">
-                                        <i class="ti ti-angle-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        <i class="ti ti-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
                 </div>
 
             </div>
@@ -327,3 +202,28 @@
 
 @endsection
 
+
+@section('script')
+<script type="text/javascript">
+
+$(document).ready(function (){
+
+    $('.to_cart').click(function(e){
+        // let this0=this
+        e.preventDefault();
+        // doBounce($(this), 1, '13px', 300);
+        $(this).addClass('animated bounce')
+        var this0=this
+        $.get("/product/"+$(this).data('ident')+"/to_cart/1");
+
+        setTimeout(function(){
+          $(this0).removeClass('animated bounce')
+        }, 1500);
+
+    })
+
+});
+  
+</script>
+      
+@endsection
