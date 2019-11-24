@@ -161,7 +161,7 @@
                                     @if (isset($product))
 
                                       <div class="col-lg-4  col-md-6 pb-30">
-                                          <a href="/mcf_product/{{ $product->ident }}">
+                                          {{-- <a href="/mcf_product/{{ $product->ident }}"> --}}
                                             <div class="single-service text-center" style="background-color: white;">
                                                 <div class="text-center">
                                                   <img src="{{ $cat2->image }}" class="img-responsive responsive-img" style="max-height: 10em; max-width: 10em;">
@@ -179,7 +179,7 @@
                                                 
 
                                             </div>
-                                          </a>
+                                          {{-- </a> --}}
                                       </div>
                                     @endif
 
