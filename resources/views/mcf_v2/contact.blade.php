@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row section-gap-half">
                 <div class="col-lg-12 text-center">
-                    <h1>{{ __('Contacts') }}</h1>
+                    <h1>{{ __('Contacts') }} </h1>
                     <h4>Наши реквизиты и партнеры</h4>
                 </div>
             </div>

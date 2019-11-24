@@ -487,16 +487,22 @@ Route::get('/mcf_blogs', function () {
 
 // php artisan route:list
 
+// Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+// {
+//     /** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 
 
-Route::get('/mcf_contact', function (Request $request) {
 
-    $language = $request->selected_language ?? 'ru';
-    session(['selected_language' =>$language]);
-    App::setLocale($language);
+// });
 
-    return view('mcf_v2.contact');
-});
+    Route::get('/mcf_contact', function (Request $request) {
+
+        // $language = $request->selected_language ?? 'ru';
+        // session(['selected_language' =>$language]);
+        // App::setLocale($language);
+
+        return view('mcf_v2.contact');
+    });
 
 
 Route::get('/contact', function () {
