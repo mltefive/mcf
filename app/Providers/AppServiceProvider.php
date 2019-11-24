@@ -54,6 +54,9 @@ class AppServiceProvider extends ServiceProvider
         // dd($dbs);
         view()->share('dbs', $dbs);
 
+        $cats = Cat::all()->sortBy('name');
+        view()->share('cats', $cats);
+
         // TODO Fuck_UP SHARE SESSION_ID
         view()->composer('*', function ($view) 
         {
@@ -65,10 +68,9 @@ class AppServiceProvider extends ServiceProvider
     
                 $session_id = \Session::getId();
                 $cart = Cart::firstOrCreate(['session_id' => $session_id]);
-                $cats = Cat::all()->sortBy('name');
                 session('cart', $cart);
                 session('session_id', $session_id);
-                $view->with('cats', $cats );
+                // $view->with('cats', $cats );
                 $view->with('cart', $cart );
                 $view->with('session_id', $session_id );
     
