@@ -56,8 +56,6 @@ CSS
             background-color: red !important;
         }
 
-        
-
         .primary-btn {
             background: #f00;
         }
