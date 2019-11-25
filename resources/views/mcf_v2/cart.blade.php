@@ -103,7 +103,7 @@
                             <div class="row">
 
                               <div class="col-xs-2 col-lg-2">
-                                <img class="img-responsive" src="{{ $line->product->image ?? "http://placehold.it/100x70" }}" style="    max-width: 9em;">
+                                <img class="img-responsive" src="{{ $line->product->cat->image ?? "http://placehold.it/100x70" }}" style="    max-width: 9em;">
                               </div>
 
                               <div class="col-xs-3 col-md-6 col-lg-6">
@@ -157,22 +157,23 @@
                               <div class="col-md-6" style="text-align: left;">
 
                                 <b>Метод оплаты</b>
-                                <div class="radio">
-                                  <label>
-                                    <input type="radio" name="pay_type" id="optionsRadios1" value="0" >
-                                    Оплата курьеру
-                                  </label>
-                                </div>
+{{--
                                 <div class="radio">
                                   <label>
                                     <input type="radio" name="pay_type" id="optionsRadios2" value="1" checked>
                                     Оплата в заведении
                                   </label>
-                                </div>
+                                </div> --}}
                                 <div class="radio">
                                   <label>
-                                    <input type="radio" name="pay_type" id="optionsRadios3" value="2">
-                                    Онлайн оплата
+                                    <input type="radio" name="pay_type" id="optionsRadios3" value="2" checked>
+                                    Онлайн оплата Картой
+                                  </label>
+                                </div>
+                                <div class="radio">
+                                 <label>
+                                    <input type="radio" name="pay_type" id="optionsRadios1" value="3" >
+                                    Выставить счёт
                                   </label>
                                 </div>
 
@@ -189,13 +190,7 @@
                                 <div class="radio">
                                   <label>
                                     <input type="radio" name="pay_place" id="optionsRadios5" value="1" checked>
-                                    Место в заведении
-                                  </label>
-                                </div>
-                                <div class="radio ">
-                                  <label>
-                                    <input type="radio" name="pay_place" id="optionsRadios6" value="2" >
-                                    На вынос
+                                    Самовывоз
                                   </label>
                                 </div>
 
@@ -204,7 +199,7 @@
                               
                               <div class="col-md-12" style="text-align: left;">
                                 <b>Адрес/Место/Примечание</b>
-                                <textarea name="pay_adr" style="width: 100%;" rows="5" placeholder="Укажите адрес: Населеный пункт, улица, номер дома, офис, домофон, этаж, подЬезд и примечания"></textarea>
+                                <textarea name="pay_adr" style="width: 100%;" rows="5" placeholder="Укажите адрес: Населеный пункт, улица, номер дома, офис и примечания"></textarea>
                               </div>
 
                               <div class="col-md-12" style="text-align: left;">
@@ -232,7 +227,7 @@
                                       Оплатить
                                     </a>
                                     {{-- <a href="/carts/{{$cart->id}}/clear" class="btn-danger btn-block" data-url="/carts/{{$cart->id}}/clear"> --}}
-                                    <a href="#" class="btn-danger btn-block btn-sm" data-url="/carts/{{$cart->id}}/clear" id="clear_btn">
+                                    <a href="/carts/{{$cart->id}}/clear" class="btn-danger btn-block btn-sm" data-url="/carts/{{$cart->id}}/clear" id="clear_btn">
                                       Очистить корзину
                                     </a>
                                   </div>
@@ -272,14 +267,13 @@
 
 $('#clear_btn').click(function(e){
   e.preventDeafult;
-
-                          $.ajax({
-                              url: $(this).data('url'),
-                              type: 'GET',
-                              success: function(result) {
-                                window.location='/mcf_cart'
-                              }
-                          });
+    $.ajax({
+        url: $(this).data('url'),
+        type: 'GET',
+        success: function(result) {
+          window.location='/mcf_cart'
+        }
+    });
 });
 
     $('span.btn-number').click(function(e){
